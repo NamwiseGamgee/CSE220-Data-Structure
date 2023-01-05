@@ -1,0 +1,27 @@
+public class RecursiveSelectionSort {
+  public void recursiveSelectionSort (int []a,int i,int min,int minLoc){
+  if (i==a.length-1) return;
+  minLoc=findMinLoc(i,i+1,a,min);
+  swap(a,minLoc,i);
+  recursiveSelectionSort(a,i+1,a[i+1],i+1); 
+  }
+  public int findMinLoc(int minLoc,int start,int []a,int min) {
+  if (start==a.length) return minLoc;
+  if(a[minLoc]>a[start]) {
+  minLoc=start;
+  }
+  return findMinLoc(minLoc,start+1,a,a[minLoc]);
+  }
+  public void swap(int[] a,int idx1,int idx2) {
+  int temp=a[idx2];
+  a[idx2]=a[idx1];
+  a[idx1]=temp;
+  }
+  //-------------------------selection Sort shesh------------------ 
+  public void printArray(int []a,int n){
+  if (n==a.length) return;
+  System.out.print(a[n]+"\t");
+  printArray(a,n+1);
+  }
+  
+}

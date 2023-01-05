@@ -1,0 +1,56 @@
+public class WRM {
+  int size;
+  int front;
+  int rear;
+  Patient p[];
+  public WRM () {
+    p=new Patient[5];
+    front=0;
+    rear=0;
+    size=0;
+  }
+  public void RegisterPatient(String n,String b,int a) throws QueueOverflowException {
+    if (size==p.length) {
+      throw new QueueOverflowException("Queue is full");
+    }
+    else {
+      p[rear]=new Patient(n,b,a);
+      size++;
+      rear=(rear+1)%p.length;
+    }
+  }
+  public Patient ServePatient() throws QueueUnderflowException {
+    if (size==0) {
+      throw new QueueUnderflowException("Queue is Empty");
+    }
+    else {
+      int temp=front;
+      front=(front+1)%p.length;
+      return p[temp];
+    }
+  }
+  
+  public void CancelAll(){
+    Patient notunLine[]=new Patient[5];
+    p=notunLine;
+    System.out.println("All the appointment has been removed");
+  }
+  public void CanDoctorGoHome(){
+    if (size==0) {
+    System.out.println("Yes, You can go home now Doctor. Have a good day.");
+    }
+    else {
+    System.out.println("No, You can't go home now Doctor. Patients are still waiting.");
+    }
+  }
+  public void ShowAllPatient() throws QueueUnderflowException {
+    if (size==0) {
+    throw new QueueUnderflowException("No one's here");
+    }
+    else {
+      for (int i=front;i!=rear;i=(i+1)%p.length) {
+      System.out.println(p[i]);
+      }
+    }
+  }
+}
